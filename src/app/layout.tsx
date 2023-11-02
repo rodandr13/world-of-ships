@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { robotoCondensed } from './ui/fonts';
+import { robotoCondensed } from './fonts';
+import Header from '@/app/components/Header';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -14,7 +15,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru" className={robotoCondensed.variable}>
-      <body>{children}</body>
+      <body>
+      <Header />
+      {children}
+      </body>
     </html>
   );
 }
