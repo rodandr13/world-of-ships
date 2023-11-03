@@ -1,0 +1,30 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background: #333333;
+  padding: 60px 0 40px 0;
+  font-family: var(--roboto);
+  font-size: 16px;
+  line-height: 19.2px;
+  color: #ffffff;
+  &__navigation {
+    margin: 25px 0 0 0;
+    padding: 30px 0 0 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+  }
+  &__wrapper {
+    max-width: 1560px;
+  }
+  &__copyright {
+    margin: 30px 0 0 0;
+  }
+  &__text {
+    opacity: 0.54;
+  }
+  &__menu {
+    list-style-type: none;
+    display: flex;
+    gap: 30px;
+  }
+}
