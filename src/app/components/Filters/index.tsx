@@ -1,4 +1,5 @@
 import styles from './filters.module.scss';
+import Button from "@/app/components/Button";
 
 export default function Filters() {
   return (
@@ -80,8 +81,8 @@ export default function Filters() {
           </li>
         </ul>
         <footer className={styles.filters__footer}>
-          <button type="button">Скрыть</button>
-          <button type="button">Применить</button>
+          <Button style="text" type="button" title="Скрыть" />
+          <Button style="accept" type="button" title="Применить" />
         </footer>
       </section>
     </>

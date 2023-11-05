@@ -1,5 +1,6 @@
 import styles from './navigation.module.scss';
 import Logo from '@/app/components/Logo';
+import Button from '@/app/components/Button';
 
 export default function Navigation() {
   return (
@@ -14,7 +15,7 @@ export default function Navigation() {
         <li className={styles.menu__item}><a className={styles.menu__link} href="">Форум</a></li>
         <li className={styles.menu__item}><a className={styles.menu__link} href="">Морское братство</a></li>
       </ul>
-      <button type="button" className={`${styles.button} ${styles.navigation__button} ${styles.button_type_download}`}>Играй бесплатно</button>
+      <Button type="button" title="Играй бесплатно" parentBlockClasses={styles.navigation__button} style="download" />
     </nav>
   );
 }
