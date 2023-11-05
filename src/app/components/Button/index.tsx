@@ -1,5 +1,5 @@
 import styles from './button.module.scss';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 type Props = {
   title?: string,
@@ -10,7 +10,7 @@ type Props = {
 
 export default function Button({ title, type, parentBlockClasses, style } : Props) {
   const buttonStyle = styles[`button_style_${style}`];
-  const buttonClasses = classNames(
+  const buttonClasses = clsx(
     styles.button,
     parentBlockClasses,
     buttonStyle,

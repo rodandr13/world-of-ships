@@ -1,10 +1,10 @@
 import styles from './filters.module.scss';
-import Button from "@/app/components/Button";
+import Button from '@/app/components/Button';
 
 export default function Filters() {
   return (
     <>
-      <button type="button">Фильтры</button>
+      <Button type="button" style="text" title="Фильтры" />
       <section className={styles.filters}>
         <header className={styles.filters__header}>
           <h2 className={styles.filters__title}>Фильтры</h2>

@@ -1,9 +1,16 @@
+.ships {
+  display: flex;
+  padding: 40px 40px 50px 40px;
+  width: 100%;
+  flex-direction: column;
+  &__toggleView {
+    align-self: flex-end;
+  }
+}
+
 .shipsList {
   display: flex;
   flex-direction: column;
-  padding: 0 40px 50px 40px;
-  width: 100%;
-
   &__country {
     margin: 100px 0 0 0;
   }
