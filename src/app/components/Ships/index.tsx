@@ -7,9 +7,6 @@ import { GET_ALL_SHIPS } from '@/app/utils/queries';
 import { useEffect, useState } from 'react';
 import ShipNations from '@/app/components/ShipNations';
 
-
-let count = 0;
-
 export default function Ships() {
   const { data, loading, error } = useQuery(GET_ALL_SHIPS);
   const [shipsByNation, setShipsByNation] = useState<Nation[]>([]);
@@ -19,7 +16,7 @@ export default function Ships() {
       const ships = data.vehicles.reduce((acc: Nation[], ship: Ship) => {
         const nationName = ship.nation.name;
         const typeName = ship.type.name;
-
+        console.log(typeName);
         let nationObj = acc.find(n => n.name === nationName);
         if (!nationObj) {
           nationObj = {
@@ -30,7 +27,6 @@ export default function Ships() {
           };
           acc.push(nationObj);
         }
-
 
         let typeObj = nationObj.types.find(t => t.name === typeName);
         if (!typeObj) {
@@ -50,7 +46,6 @@ export default function Ships() {
       setShipsByNation(ships);
     }
   }, [data]);
-
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
 

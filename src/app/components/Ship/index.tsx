@@ -1,6 +1,7 @@
 import styles from '@/app/components/Ships/ships.module.scss';
 import Image from 'next/image';
 import { useRef } from 'react';
+import { SHIP_LEVELS, SHIP_TYPE_RU } from '@/app/utils/constans';
 
 type Props = {
   ship: Ship,
@@ -33,11 +34,11 @@ export default function Ship({ ship } : Props) {
         <div className={styles.ship__class}>
           <Image className={styles.ship__classImage} src={`https:${ship.type.icons.default}`}
                  alt={`Иконка: ${ship.type.title}`} width={30} height={30}/>
-          <p className={styles.ship__classCaption}>{ship.type.title}</p>
+          <p className={styles.ship__classCaption}>{SHIP_TYPE_RU[ship.type.name]}</p>
         </div>
-        <Image src={`https:${ship.icons.medium}`} alt="" width={280} height={165}/>
+        <Image className={styles.ship__image} src={`https:${ship.icons.medium}`} alt="" width={280} height={165}/>
         <header className={styles.ship__header}>
-          <span className={styles.ship__level}>{ship.level}</span>
+          <span className={styles.ship__level}>{SHIP_LEVELS[ship.level]}</span>
           <h4 className={styles.ship__title}>{ship.title}</h4>
         </header>
         <div ref={descriptionRef} className={styles.ship__description}>
