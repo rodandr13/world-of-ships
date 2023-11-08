@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['glossary.korabli.su'],
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "glossary.korabli.su",
+            }
+        ],
     },
 }
 

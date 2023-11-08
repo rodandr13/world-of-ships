@@ -49,3 +49,13 @@ type ShipNation = {
 type TypeIcons = {
   default: string | null,
 };
+
+type NationOption = {
+  name: string;
+  icon: string | null;
+};
+
+type TypeOption = {
+  name: string;
+  icon: string | null;
+};

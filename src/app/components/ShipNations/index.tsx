@@ -15,6 +15,7 @@ export default function ShipNations({ styles, nation }: Props) {
         <h2 className={styles.shipsList__countryTitle}>{NATIONS_RU[nation.name]}</h2>
       </header>
       {nation.types.map(type => (
+        type.ships.length > 0 &&
         <ShipTypes styles={styles} key={type.name} type={type} />
       ))}
     </article>
