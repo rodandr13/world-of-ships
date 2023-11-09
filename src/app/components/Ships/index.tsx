@@ -22,8 +22,6 @@ export default function Ships({ setNationOptions, setTypeOptions, setLevelOption
   const [filteredShips, setFilteredShips] = useState<Nation[]>([]);
 
   function filterShips(ships: Nation[], selectedValues: any) {
-
-
     return ships
       .filter(nation => selectedValues.nations.length === 0 || selectedValues.nations.includes(nation.name))
       .map(nation => ({
@@ -39,7 +37,6 @@ export default function Ships({ setNationOptions, setTypeOptions, setLevelOption
   }
 
   useEffect(() => {
-    console.log(selectedLevels);
     setFilteredShips(filterShips(shipsByNation, { 'levels': selectedLevels, 'nations': selectedNations, 'types': selectedTypes }));
   }, [selectedLevels, selectedTypes, selectedNations]);
 
@@ -99,6 +96,7 @@ export default function Ships({ setNationOptions, setTypeOptions, setLevelOption
       setTypeOptions(typeFilters);
       setLevelOptions(levelFilters);
       setShipsByNation(ships);
+      setFilteredShips(ships);
     }
   }, [data]);
   if (loading) return 'Loading...';

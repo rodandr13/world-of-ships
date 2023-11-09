@@ -2,6 +2,9 @@
   width: 100%;
   background: #303D42;
   border: 2px solid #545B5F;
+  &_hide {
+    display: none;
+  }
   &__title {
     color: #9BB1B2;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.35);

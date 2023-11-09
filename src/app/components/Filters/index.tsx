@@ -2,7 +2,8 @@ import styles from './filters.module.scss';
 import Button from '@/app/components/Button';
 import { NATIONS_RU, SHIP_LEVELS, SHIP_TYPE_RU } from '@/app/utils/constans';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
+
 
 type Props = {
   nationOptions: NationOption[],
@@ -14,6 +15,7 @@ type Props = {
 };
 
 export default function Filters({ typeOptions, nationOptions, levelOptions, setSelectedLevels, setSelectedTypes, setSelectedNations }: Props) {
+  const [visibleFilters, setVisibleFilters] = useState(false);
 
   function handleLevelChange(e: React.ChangeEvent<HTMLInputElement>) {
     const taget = e.target;
@@ -54,10 +56,21 @@ export default function Filters({ typeOptions, nationOptions, levelOptions, setS
     });
   }
 
+  function handleClick() {
+    setVisibleFilters(!visibleFilters);
+    console.log(visibleFilters);
+  }
+  
+  function handleHideFilters() {
+    if (visibleFilters) {
+      setVisibleFilters(false);
+    }
+  }
+
   return (
     <>
-      <Button type="button" style="text" title="Фильтры"/>
-      <section className={styles.filters}>
+      <Button type="button" style="text" title="Фильтры" handleClick={handleClick}/>
+      <section className={`${styles.filters} ${!visibleFilters ? styles.filters_hide : ''}`}>
         <header className={styles.filters__header}>
           <h2 className={styles.filters__title}>Фильтры</h2>
         </header>
@@ -132,8 +145,8 @@ export default function Filters({ typeOptions, nationOptions, levelOptions, setS
           </li>
         </ul>
         <footer className={styles.filters__footer}>
-          <Button style="text" type="button" title="Скрыть"/>
-          <Button style="accept" type="button" title="Применить"/>
+          <Button style="text" type="button" title="Скрыть" handleClick={handleHideFilters}/>
+          <Button style="accept" type="button" title="Применить"  />
         </footer>
       </section>
     </>
