@@ -3,62 +3,42 @@ import Button from '@/app/components/Button';
 import { NATIONS_RU, SHIP_LEVELS, SHIP_TYPE_RU } from '@/app/utils/constans';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import { useTypedDispatch } from '@/app/hooks/useTypedDispatch';
+import { setSelectedNations, setSelectedTypes, setSelectedLevels } from '@/app/redux/features/filtersSlice';
+import { useTypedSelector } from '@/app/hooks/useTypedSelector';
 
-
-type Props = {
-  nationOptions: NationOption[],
-  typeOptions: TypeOption[],
-  levelOptions: number[],
-  setSelectedLevels: React.Dispatch<React.SetStateAction<number[]>>,
-  setSelectedTypes:  React.Dispatch<React.SetStateAction<string[]>>,
-  setSelectedNations:  React.Dispatch<React.SetStateAction<string[]>>
-};
-
-export default function Filters({ typeOptions, nationOptions, levelOptions, setSelectedLevels, setSelectedTypes, setSelectedNations }: Props) {
+export default function Filters() {
+  console.log('Render Filters');
+  const dispatch = useTypedDispatch();
+  const levelOptions = useTypedSelector(state => state.filters.levelOptions);
+  const typeOptions = useTypedSelector(state => state.filters.typeOptions);
+  const nationOptions = useTypedSelector(state => state.filters.nationOptions);
+  
   const [visibleFilters, setVisibleFilters] = useState(false);
 
   function handleLevelChange(e: React.ChangeEvent<HTMLInputElement>) {
     const taget = e.target;
     const isChecked = taget.checked;
     const selectedLevel = parseInt(taget.name.split('_')[1]);
-    setSelectedLevels(prevSelectedLevel => {
-      if (isChecked) {
-        return [...prevSelectedLevel, selectedLevel];
-      } else {
-        return prevSelectedLevel.filter(level => level !== selectedLevel);
-      }
-    });
+    dispatch(setSelectedLevels({ level: selectedLevel, isChecked: isChecked }));
   }
 
   function handleTypeChange(e: React.ChangeEvent<HTMLInputElement>) {
     const taget = e.target;
     const isChecked = taget.checked;
     const selectedType = taget.name;
-    setSelectedTypes(prevSelectedType => {
-      if (isChecked) {
-        return [...prevSelectedType, selectedType];
-      } else {
-        return prevSelectedType.filter(type => type !== selectedType);
-      }
-    });
+    dispatch(setSelectedTypes({ type: selectedType, isChecked: isChecked }));
   }
 
   function handleNationChange(e: React.ChangeEvent<HTMLInputElement>) {
     const taget = e.target;
     const isChecked = taget.checked;
     const selectedNation = taget.name;
-    setSelectedNations(prevSelectedNation => {
-      if (isChecked) {
-        return [...prevSelectedNation, selectedNation];
-      } else {
-        return prevSelectedNation.filter(nation => nation !== selectedNation);
-      }
-    });
+    dispatch(setSelectedNations({ nation: selectedNation, isChecked: isChecked }));
   }
 
   function handleClick() {
     setVisibleFilters(!visibleFilters);
-    console.log(visibleFilters);
   }
   
   function handleHideFilters() {

@@ -7,7 +7,11 @@ type Props = {
   ship: Ship,
 };
 
+let count = 0;
+
 export default function Ship({ ship } : Props) {
+  console.log('Render SHIP', count);
+  count++;
   const shipRef = useRef<HTMLDivElement>(null);
   const descriptionRef = useRef<HTMLDivElement>(null);
 
