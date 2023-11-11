@@ -3,21 +3,13 @@
 import styles from './ships.module.scss';
 import ToggleDisplayShips from '@/app/components/ToggleDisplayShips';
 import ShipNations from '@/app/components/ShipNations';
-import { useTypedSelector } from '@/app/hooks/useTypedSelector';
-import { makeSelectFilteredShips, selectFilteredShips } from '@/app/redux/selectors';
+import { makeSelectFilteredShips } from '@/app/redux/selectors';
 import { useShipsData } from '@/app/hooks/useShipsData';
 import { useSelector } from 'react-redux';
 
 export default function Ships() {
   const { loading, error } = useShipsData();
-  console.log('Render Ships');
-  //const filteredShips = useTypedSelector(selectFilteredShips);
-  const selectedValues = {
-    nations: ['ussr'],
-    types: [],
-    levels: [1],
-  };
-  const selectFilteredShipsNew = makeSelectFilteredShips(selectedValues);
+  const selectFilteredShipsNew = makeSelectFilteredShips();
   const filteredShipsNew = useSelector(selectFilteredShipsNew);
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;

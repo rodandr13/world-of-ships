@@ -11,10 +11,7 @@ import { useTypedDispatch } from '@/app/hooks/useTypedDispatch';
 export function useShipsData() {
   const { data, loading, error } = useQuery(GET_ALL_SHIPS);
   const dispatch = useTypedDispatch();
-  console.log('GET_ALL_SHIPS', data);
   useEffect(() => {
-    console.log('вошел в use effect');
-    console.log('data', data);
     if (data) {
       const ships = data.vehicles.reduce((acc: Nation[], ship: Ship) => {
         const nationName = ship.nation.name;

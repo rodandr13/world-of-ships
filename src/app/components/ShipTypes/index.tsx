@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Ship from '@/app/components/Ship';
+import LazyLoadComponent from '@/app/components/LazyLoadComponent';
 import { SHIP_TYPE_RU } from '@/app/utils/constans';
 
 type Props = {
@@ -18,7 +19,9 @@ export default function ShipTypes({ styles, type }: Props) {
       <ul className={styles.shipsList__ships}>
         {type.ships.map(ship => (
           <li key={ship.title} className={styles.shipsList__shipItem}>
-            <Ship ship={ship} />
+            <LazyLoadComponent>
+              <Ship ship={ship} />
+            </LazyLoadComponent>
           </li>
         ))}
       </ul>

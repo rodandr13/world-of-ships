@@ -16,9 +16,16 @@ function filterShips(ships: Nation[], selectedValues: any) {
     }));
 }
 
-export const makeSelectFilteredShips = (selectedValues: any) => {
+export const makeSelectFilteredShips = () => {
   return createSelector(
-    [(state: RootState) => state.ships.filteredList],
-    (filteredList) => filterShips(filteredList, selectedValues),
+    [(state: RootState) => state.ships.filteredList, (state: RootState) => state.filters],
+    (filteredList, filters) => {
+      const selectedValues = {
+        nations: filters.selectedNations,
+        types: filters.selectedTypes,
+        levels: filters.selectedLevels,
+      };
+      return filterShips(filteredList, selectedValues);
+    },
   );
 };

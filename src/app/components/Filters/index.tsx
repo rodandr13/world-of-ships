@@ -8,7 +8,6 @@ import { setSelectedNations, setSelectedTypes, setSelectedLevels } from '@/app/r
 import { useTypedSelector } from '@/app/hooks/useTypedSelector';
 
 export default function Filters() {
-  console.log('Render Filters');
   const dispatch = useTypedDispatch();
   const levelOptions = useTypedSelector(state => state.filters.levelOptions);
   const typeOptions = useTypedSelector(state => state.filters.typeOptions);

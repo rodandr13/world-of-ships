@@ -1,17 +1,13 @@
 import styles from '@/app/components/Ships/ships.module.scss';
 import Image from 'next/image';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SHIP_LEVELS, SHIP_TYPE_RU } from '@/app/utils/constans';
 
 type Props = {
   ship: Ship,
 };
 
-let count = 0;
-
-export default function Ship({ ship } : Props) {
-  console.log('Render SHIP', count);
-  count++;
+function Ship({ ship } : Props) {
   const shipRef = useRef<HTMLDivElement>(null);
   const descriptionRef = useRef<HTMLDivElement>(null);
 
@@ -29,7 +25,7 @@ export default function Ship({ ship } : Props) {
       currentShipWrapper.style.height = 'auto';
     }
   }
-  
+
   return (
     <article className={styles.ship} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <div ref={shipRef} className={styles.ship__wrapper} >
@@ -54,3 +50,5 @@ export default function Ship({ ship } : Props) {
     </article>
   );
 }
+
+export default React.memo(Ship);
