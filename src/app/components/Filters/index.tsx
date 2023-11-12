@@ -97,7 +97,6 @@ export default function Filters() {
               ))}
             </ul>
         }
-
       </div>
       <div className={`${styles.filters__container} ${!visibleFilters ? styles.filters__container_hide : ''}`}>
         <header className={styles.filters__header}>
@@ -106,7 +105,7 @@ export default function Filters() {
         <ul className={styles.filters__categories}>
           <li className={styles.filters__category}>
             <h3 className={styles.filters__categoryTitle}>Уровень</h3>
-            <ul className={styles.filters__categoryList}>
+            <ul className={`${styles.filters__categoryList} ${styles.filters__categoryList_style_level}`}>
               {levelOptions.map(level => (
                 <li key={level.number} className={styles.filters__categoryItem}>
                   <div className={styles.filters__categoryOption}>
@@ -130,7 +129,7 @@ export default function Filters() {
           </li>
           <li className={styles.filters__category}>
             <h3 className={styles.filters__categoryTitle}>Класс</h3>
-            <ul className={styles.filters__categoryList}>
+            <ul className={`${styles.filters__categoryList} ${styles.filters__categoryList_style_type}`}>
               {typeOptions.map(type => (
                 <li key={type.name} className={styles.filters__categoryItem}>
                   <div className={styles.filters__categoryOption}>
@@ -153,7 +152,7 @@ export default function Filters() {
           </li>
           <li className={styles.filters__category}>
             <h3 className={styles.filters__categoryTitle}>Нация</h3>
-            <ul className={styles.filters__categoryList}>
+            <ul className={`${styles.filters__categoryList} ${styles.filters__categoryList_style_nation}`}>
               {nationOptions.map(nation => (
                 <li key={nation.name} className={styles.filters__categoryItem}>
                   <div className={styles.filters__categoryOption}>

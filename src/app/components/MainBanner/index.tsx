@@ -3,8 +3,15 @@ import Image from 'next/image';
 
 export default function MainBanner() {
   return (
-   <section aria-label="Мир кораблей">
-     <Image className={styles.mainBanner} src="/images/main_banner.svg" alt="Логотип Мир кораблей" width={448} height={245} />
+   <section className={styles.mainBanner} aria-label="Мир кораблей">
+     <Image
+       className={styles.mainBanner__image}
+       src="/images/main_banner.svg"
+       alt="Логотип Мир кораблей"
+       layout="responsive"
+       width={448}
+       height={245}
+     />
    </section>
   );
 }

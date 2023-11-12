@@ -11,6 +11,14 @@
 .shipsList {
   display: flex;
   flex-direction: column;
+  &__ships {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 35px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
   &__country {
     margin: 100px 0 0 0;
     &:first-child {
@@ -20,20 +28,24 @@
   &__shipItem {
     position: relative;
   }
+  &__countryImageContainer {
+    max-width: 150px;
+    height: auto;
+  }
 
   &__countryImage {
     display: block;
   }
 
   &__countryHeader {
-    margin: 0 0 100px 0;
+    margin: 0;
     display: flex;
     align-items: center;
     width: 100%;
   }
 
   &__countryTitle {
-    font-size: 44px;
+    font-size: 38px;
     font-weight: 700;
     text-transform: uppercase;
     margin: 0 0 0 30px;
@@ -41,7 +53,7 @@
   }
   &__class {
     position: relative;
-    margin-top: 100px;
+    margin-top: 50px;
   }
   &__classImage {
     display: block;
@@ -55,26 +67,17 @@
   }
 
   &__classTitle {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 400;
     text-transform: uppercase;
     margin: 0 0 0 10px;
     padding: 0;
   }
-
-  &__ships {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 72px;
-    flex-wrap: wrap;
-  }
 }
 
 .ship {
   position: relative;
-  width: 320px;
+  //width: 320px;
   height: 203px;
   &:hover {
     z-index: 1;
@@ -153,6 +156,38 @@
       border: 1px solid #B3B6BA;
       border-radius: 2px;
       visibility: hidden;
+    }
+  }
+}
+
+
+@media screen and (max-width: 700px){
+  .ships {
+    padding: 0;
+  }
+}
+@media screen and (max-width: 450px){
+  .ship {
+    &__header {
+      margin: 0;
+    }
+  }
+  .shipsList {
+    &__ships {
+      gap: 15px;
+    }
+    &__class {
+      margin-top: 20px;
+    }
+    &__countryTitle {
+      font-size: 28px;
+      margin: 0 0 0 15px;
+    }
+    &__classHeader {
+      margin: 15px 0 15px 0;
+    }
+    &__classTitle {
+      font-size: 14px;
     }
   }
 }

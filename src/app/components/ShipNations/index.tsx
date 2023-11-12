@@ -10,8 +10,15 @@ export default function ShipNations({ styles, nation }: Props) {
   return (
     <article className={styles.shipsList__country}>
       <header className={styles.shipsList__countryHeader}>
-        <Image className={styles.shipsList__countryImage} src={`https:${nation.icons.large}`}
-               alt="Флаг Японии" width={222} height={134}/>
+        <div className={styles.shipsList__countryImageContainer}>
+          <Image
+            className={styles.shipsList__countryImage}
+            src={`https:${nation.icons.large}`}
+            alt="Флаг Японии"
+            width={222} height={134}
+            layout="responsive"
+          />
+        </div>
         <h2 className={styles.shipsList__countryTitle}>{NATIONS_RU[nation.name]}</h2>
       </header>
       {nation.types.map(type => (
