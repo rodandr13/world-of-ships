@@ -29,12 +29,14 @@
     position: relative;
   }
   &__countryImageContainer {
-    max-width: 150px;
-    height: auto;
+    max-width: 222px;
+    width: 100%;
+    aspect-ratio: 1.65;
+    position: relative;
   }
 
   &__countryImage {
-    display: block;
+    object-fit: contain;
   }
 
   &__countryHeader {
@@ -72,6 +74,10 @@
     text-transform: uppercase;
     margin: 0 0 0 10px;
     padding: 0;
+  }
+  &__noShipsMessage {
+    font-size: 24px;
+    text-align: center;
   }
 }
 
@@ -164,6 +170,11 @@
 @media screen and (max-width: 700px){
   .ships {
     padding: 0;
+  }
+  .shipsList {
+    &__countryImageContainer {
+      max-width: 150px;
+    }
   }
 }
 @media screen and (max-width: 450px){

@@ -15,14 +15,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
   return (
     <html lang="ru" className={`${robotoCondensed.variable} ${roboto.variable}`}>
       <body>
-      <Header />
-      <ReduxProviders>
-        {children}
-      </ReduxProviders>
-      <Footer />
+        <Header />
+        <ReduxProviders>
+          {children}
+        </ReduxProviders>
+        <Footer />
       </body>
     </html>
   );

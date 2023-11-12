@@ -1,0 +1,41 @@
+.preloader {
+  width: 155px;
+  height: 155px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  &__image {
+    object-fit: contain;
+    padding: 20px;
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    transform-origin: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("/images/spiner_icons.svg") no-repeat;
+    background-size: contain;
+    animation: spin 1.5s linear infinite;
+    z-index: -1;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0 200px 0;
+}
