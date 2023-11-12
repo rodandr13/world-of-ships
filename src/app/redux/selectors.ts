@@ -1,17 +1,21 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from './store';
 
-function filterShips(ships: Nation[], selectedValues: any) {
+function filterShips(ships: Nation[], filters: FiltersState) {
+  const selectedNations = filters.nationOptions.filter(nation => nation.isSelected).map(nation => nation.name);
+  const selectedTypes = filters.typeOptions.filter(type => type.isSelected).map(type => type.name);
+  const selectedLevels = filters.levelOptions.filter(level => level.isSelected).map(level => level.number);
+
   return ships
-    .filter(nation => selectedValues.nations.length === 0 || selectedValues.nations.includes(nation.name))
+    .filter(nation => selectedNations.length === 0 || selectedNations.includes(nation.name))
     .map(nation => ({
       ...nation,
       types: nation.types
-        .filter(type => selectedValues.types.length === 0 || selectedValues.types.includes(type.name))
+        .filter(type => selectedTypes.length === 0 || selectedTypes.includes(type.name))
         .map(type => ({
           ...type,
           ships: type.ships
-            .filter(ship => selectedValues.levels.length === 0 || selectedValues.levels.includes(ship.level)),
+            .filter(ship => selectedLevels.length === 0 || selectedLevels.includes(ship.level)),
         })),
     }));
 }
@@ -19,13 +23,6 @@ function filterShips(ships: Nation[], selectedValues: any) {
 export const makeSelectFilteredShips = () => {
   return createSelector(
     [(state: RootState) => state.ships.filteredList, (state: RootState) => state.filters],
-    (filteredList, filters) => {
-      const selectedValues = {
-        nations: filters.selectedNations,
-        types: filters.selectedTypes,
-        levels: filters.selectedLevels,
-      };
-      return filterShips(filteredList, selectedValues);
-    },
+    (filteredList, filters) => filterShips(filteredList, filters),
   );
 };

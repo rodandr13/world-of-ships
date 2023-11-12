@@ -20,16 +20,21 @@ export function useShipsData() {
         const nationOption = {
           name: ship.nation.name,
           icon: ship.nation.icons.small,
+          isSelected: false,
         };
         dispatch(setNationOptions(nationOption));
 
         const typeOption = {
           name: ship.type.name,
           icon: ship.type.icons.default,
+          isSelected: false,
         };
         dispatch(setTypeOptions(typeOption));
 
-        const levelOption = ship.level;
+        const levelOption = {
+          number: ship.level,
+          isSelected: false,
+        };
         dispatch(setLevelOptions(levelOption));
 
         let nationObj = acc.find(n => n.name === nationName);

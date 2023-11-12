@@ -50,12 +50,25 @@ type TypeIcons = {
   default: string | null,
 };
 
+type LevelOption = {
+  number: number;
+  isSelected: boolean;
+};
+
 type NationOption = {
   name: string;
   icon: string | null;
+  isSelected: boolean;
 };
 
 type TypeOption = {
   name: string;
   icon: string | null;
+  isSelected: boolean;
+};
+
+type FiltersState = {
+  nationOptions: NationOption[];
+  typeOptions: TypeOption[];
+  levelOptions: LevelOption[];
 };

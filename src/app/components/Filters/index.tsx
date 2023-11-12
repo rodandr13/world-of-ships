@@ -4,7 +4,12 @@ import { NATIONS_RU, SHIP_LEVELS, SHIP_TYPE_RU } from '@/app/utils/constans';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { useTypedDispatch } from '@/app/hooks/useTypedDispatch';
-import { setSelectedNations, setSelectedTypes, setSelectedLevels } from '@/app/redux/features/filtersSlice';
+import {
+  resetFilters,
+  toggleLevelOption,
+  toggleTypeOption,
+  toggleNationOption,
+} from '@/app/redux/features/filtersSlice';
 import { useTypedSelector } from '@/app/hooks/useTypedSelector';
 
 export default function Filters() {
@@ -12,28 +17,21 @@ export default function Filters() {
   const levelOptions = useTypedSelector(state => state.filters.levelOptions);
   const typeOptions = useTypedSelector(state => state.filters.typeOptions);
   const nationOptions = useTypedSelector(state => state.filters.nationOptions);
-  
+  const selectedLevels = levelOptions.filter(level => level.isSelected);
+  const selectedTypes = typeOptions.filter(type => type.isSelected);
+  const selectedNations = nationOptions.filter(nation => nation.isSelected);
   const [visibleFilters, setVisibleFilters] = useState(false);
-
-  function handleLevelChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const taget = e.target;
-    const isChecked = taget.checked;
-    const selectedLevel = parseInt(taget.name.split('_')[1]);
-    dispatch(setSelectedLevels({ level: selectedLevel, isChecked: isChecked }));
+  const isFiltersSelected = selectedLevels.length > 0 || selectedTypes.length > 0 || selectedNations.length > 0;
+  function handleLevelChange(level: number) {
+    dispatch(toggleLevelOption(level));
   }
 
-  function handleTypeChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const taget = e.target;
-    const isChecked = taget.checked;
-    const selectedType = taget.name;
-    dispatch(setSelectedTypes({ type: selectedType, isChecked: isChecked }));
+  function handleTypeChange(typeName: string) {
+    dispatch(toggleTypeOption(typeName));
   }
 
-  function handleNationChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const taget = e.target;
-    const isChecked = taget.checked;
-    const selectedNation = taget.name;
-    dispatch(setSelectedNations({ nation: selectedNation, isChecked: isChecked }));
+  function handleNationChange(nationName: string) {
+    dispatch(toggleNationOption(nationName));
   }
 
   function handleClick() {
@@ -46,10 +44,62 @@ export default function Filters() {
     }
   }
 
+  function handleClearFilters() {
+    dispatch(resetFilters());
+  }
+
+  function handleRemoveLevelTag(levelNumber: number) {
+    dispatch(toggleLevelOption(levelNumber));
+  }
+
+  function handleRemoveTypeTag(levelNumber: string) {
+    dispatch(toggleTypeOption(levelNumber));
+  }
+
+  function handleRemoveNationTag(levelNumber: string) {
+    dispatch(toggleNationOption(levelNumber));
+  }
+
   return (
-    <>
-      <Button type="button" style="text" title="Фильтры" handleClick={handleClick}/>
-      <section className={`${styles.filters} ${!visibleFilters ? styles.filters_hide : ''}`}>
+    <section className={styles.filters}>
+      <div className={styles.filters__buttonContainer}>
+        <Button type="button" style="filter" title="Фильтры" parentBlockClasses={styles.filters__button} handleClick={handleClick} />
+        <button className={`${styles.filters__buttonClear} ${!isFiltersSelected && styles.filters__buttonClear_hide}`} type="button" onClick={handleClearFilters}>Очистить фильтры</button>
+      </div>
+      <div className={styles.filters__activeFilters}>
+        {selectedLevels.length > 0 &&
+            <ul className={styles.filters__activeFiltersList}>
+              {selectedLevels.map(level => (
+                <li className={styles.filters__activeFiltersItem} key={level.number}>
+                  <span className={styles.filters__activeFiltersTag}>{SHIP_LEVELS[level.number]}</span>
+                  <button className={styles.filters__removeTag} type="button" onClick={() => handleRemoveLevelTag(level.number)} />
+                </li>
+              ))}
+            </ul>
+        }
+        {selectedTypes.length > 0 &&
+            <ul className={styles.filters__activeFiltersList}>
+              {selectedTypes.map(type => (
+                <li className={styles.filters__activeFiltersItem} key={type.name}>
+                  <span className={styles.filters__activeFiltersTag}>{SHIP_TYPE_RU[type.name]}</span>
+                  <button className={styles.filters__removeTag} type="button" onClick={() => handleRemoveTypeTag(type.name)} />
+                </li>
+              ))}
+            </ul>
+        }
+        {selectedNations.length > 0 &&
+            <ul className={styles.filters__activeFiltersList}>
+              {selectedNations.map(nation => (
+                <li className={styles.filters__activeFiltersItem} key={nation.name}>
+                  <span className={styles.filters__activeFiltersTag}>{NATIONS_RU[nation.name]}</span>
+                  <button className={styles.filters__removeTag} type="button" onClick={() => handleRemoveNationTag(nation.name)} />
+                </li>
+              ))}
+            </ul>
+        }
+
+      </div>
+      <div className={`${styles.filters__container} ${!visibleFilters ? styles.filters__container_hide : ''}`}>
         <header className={styles.filters__header}>
           <h2 className={styles.filters__title}>Фильтры</h2>
         </header>
@@ -58,19 +108,20 @@ export default function Filters() {
             <h3 className={styles.filters__categoryTitle}>Уровень</h3>
             <ul className={styles.filters__categoryList}>
               {levelOptions.map(level => (
-                <li key={level} className={styles.filters__categoryItem}>
+                <li key={level.number} className={styles.filters__categoryItem}>
                   <div className={styles.filters__categoryOption}>
                     <input
-                      name={`level_${level}`}
-                      id={`level_${level}`}
+                      name={`level_${level.number}`}
+                      id={`level_${level.number}`}
                       className={styles.filters__checkbox}
                       type="checkbox"
-                      onChange={handleLevelChange}
+                      onChange={() => handleLevelChange(level.number)}
+                      checked={level.isSelected}
                     />
                     <label
-                      htmlFor={`level_${level}`}
+                      htmlFor={`level_${level.number}`}
                       className={styles.filters__label}>
-                      {SHIP_LEVELS[level]}
+                      {SHIP_LEVELS[level.number]}
                     </label>
                   </div>
                 </li>
@@ -88,7 +139,8 @@ export default function Filters() {
                       id={type.name}
                       className={styles.filters__checkbox}
                       type="checkbox"
-                      onChange={handleTypeChange}
+                      onChange={() => handleTypeChange(type.name)}
+                      checked={type.isSelected}
                     />
                     <label htmlFor={type.name} className={styles.filters__label}>
                       <Image className={styles.filters__labelIcon} src={`https:${type.icon}`} alt="" width={30} height={30}/>
@@ -110,7 +162,8 @@ export default function Filters() {
                       id={nation.name}
                       className={styles.filters__checkbox}
                       type="checkbox"
-                      onChange={handleNationChange}
+                      onChange={() => handleNationChange(nation.name)}
+                      checked={nation.isSelected}
                     />
                     <label htmlFor={nation.name}
                            className={styles.filters__label}>
@@ -127,7 +180,7 @@ export default function Filters() {
           <Button style="text" type="button" title="Скрыть" handleClick={handleHideFilters}/>
           <Button style="accept" type="button" title="Применить"  />
         </footer>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

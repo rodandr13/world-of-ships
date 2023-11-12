@@ -26,4 +26,22 @@
     color: #ffffff;
     border: 1px solid #738E8E;
   }
+  &_style_filter {
+    background-image: unset;
+    background: unset;
+    color: #ffffff;
+    position: relative;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 0 0 0 25px;
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 4px;
+      width: 17px;
+      height: 17px;
+      background: url("/images/filter_icon.svg");;
+    }
+  }
 }

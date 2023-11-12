@@ -1,9 +1,14 @@
 .filters {
-  width: 100%;
-  background: #303D42;
-  border: 2px solid #545B5F;
-  &_hide {
-    display: none;
+  padding: 20px 40px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  &__container {
+    width: 100%;
+    background: #303D42;
+    border: 2px solid #545B5F;
+    &_hide {
+      display: none;
+    }
   }
   &__title {
     color: #9BB1B2;
@@ -102,5 +107,85 @@
     display: flex;
     justify-content: flex-end;
     border-top: 2px solid #545B5F;
+  }
+  &__button {
+    align-self: flex-start;
+  }
+  &__activeFilters {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 20px 0;
+    gap: 15px;
+  }
+  &__activeFiltersList {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    gap: 10px;
+  }
+  &__activeFiltersItem {
+    position: relative;
+    &:hover .filters__removeTag {
+      display: flex;
+    }
+  }
+  &__activeFiltersTag {
+    background: #ffffff;
+    color: #333333;
+    padding: 3px 13px;
+    border-radius: 15px;
+    opacity: 0.7;
+  }
+  &__activeFiltersHeader {
+    font-size: 14px;
+    font-weight: 200;
+    margin: 0 0 5px 0;
+    opacity: 0.77;
+  }
+  &__buttonContainer {
+    margin: 0 0 20px 0;
+    display: flex;
+    gap: 10px;
+  }
+  &__buttonClear {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    color: #ffffff;
+    font-size: 12px;
+    align-self: flex-end;
+    margin: 0 0 2px 0;
+    opacity: 0.7;
+    &_hide {
+      display: none;
+    }
+  }
+  &__removeTag {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: -10px;
+    right: -7px;
+    display: none;
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 2px;
+      background-color: #000000;
+    }
+    &::before {
+      transform: rotate(45deg);
+    }
+    &::after {
+      transform: rotate(-45deg);
+    }
   }
 }

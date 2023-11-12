@@ -13,8 +13,10 @@
   flex-direction: column;
   &__country {
     margin: 100px 0 0 0;
+    &:first-child {
+      margin: 0;
+    }
   }
-
   &__shipItem {
     position: relative;
   }

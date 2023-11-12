@@ -3,19 +3,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface FiltersState {
   nationOptions: NationOption[];
   typeOptions: TypeOption[];
-  levelOptions: number[];
-  selectedNations: string[];
-  selectedTypes: string[];
-  selectedLevels: number[];
+  levelOptions: LevelOption[];
 }
 
 const initialState: FiltersState = {
   nationOptions: [],
   typeOptions: [],
   levelOptions: [],
-  selectedNations: [],
-  selectedTypes: [],
-  selectedLevels: [],
 };
 
 export const filtersSlice = createSlice({
@@ -36,43 +30,39 @@ export const filtersSlice = createSlice({
         state.typeOptions.push(option);
       }
     },
-    setLevelOptions: (state, action: PayloadAction<number>) => {
+    setLevelOptions: (state, action: PayloadAction<LevelOption>) => {
       const option = action.payload;
-      const isLevelExist = state.levelOptions.includes(option);
+      const isLevelExist = state.levelOptions.some(level => level.number === option.number);
       if (!isLevelExist) {
         state.levelOptions.push(option);
-        state.levelOptions.sort((a, b) => a - b);
+        state.levelOptions.sort((a, b) => a.number - b.number);
       }
     },
-    setSelectedNations: (state, action: PayloadAction<{ nation: string; isChecked: boolean }>) => {
-      const { nation, isChecked } = action.payload;
-      if (isChecked) {
-        if (!state.selectedNations.includes(nation)) {
-          state.selectedNations.push(nation);
-        }
-      } else {
-        state.selectedNations = state.selectedNations.filter(n => n !== nation);
+    toggleNationOption: (state, action: PayloadAction<string>) => {
+      const nationName = action.payload;
+      const nation = state.nationOptions.find(n => n.name === nationName);
+      if (nation) {
+        nation.isSelected = !nation.isSelected;
       }
     },
-    setSelectedTypes: (state, action: PayloadAction<{ type: string; isChecked: boolean }>) => {
-      const { type, isChecked } = action.payload;
-      if (isChecked) {
-        if (!state.selectedTypes.includes(type)) {
-          state.selectedTypes.push(type);
-        }
-      } else {
-        state.selectedTypes = state.selectedTypes.filter(l => l !== type);
+    toggleLevelOption: (state, action: PayloadAction<number>) => {
+      const levelOption = action.payload;
+      const level = state.levelOptions.find(l => l.number === levelOption);
+      if (level) {
+        level.isSelected = !level.isSelected;
       }
     },
-    setSelectedLevels: (state, action: PayloadAction<{ level: number; isChecked: boolean }>) => {
-      const { level, isChecked } = action.payload;
-      if (isChecked) {
-        if (!state.selectedLevels.includes(level)) {
-          state.selectedLevels.push(level);
-        }
-      } else {
-        state.selectedLevels = state.selectedLevels.filter(l => l !== level);
+    toggleTypeOption: (state, action: PayloadAction<string>) => {
+      const typeName = action.payload;
+      const type = state.typeOptions.find(t => t.name === typeName);
+      if (type) {
+        type.isSelected = !type.isSelected;
       }
+    },
+    resetFilters: (state) => {
+      state.nationOptions.forEach(nation => nation.isSelected = false);
+      state.typeOptions.forEach(type => type.isSelected = false);
+      state.levelOptions.filter(level => level.isSelected = false);
     },
   },
 });
@@ -81,8 +71,9 @@ export const {
   setNationOptions,
   setTypeOptions,
   setLevelOptions,
-  setSelectedNations,
-  setSelectedTypes,
-  setSelectedLevels,
+  resetFilters,
+  toggleTypeOption,
+  toggleLevelOption,
+  toggleNationOption,
 } = filtersSlice.actions;
 export default filtersSlice.reducer;
