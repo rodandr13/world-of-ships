@@ -2,33 +2,27 @@
   display: flex;
   justify-content: center;
   max-width: 448px;
+  width: 100%;
   height: auto;
   position: relative;
-  margin: 0 auto;
+  margin: 100px auto 100px auto;
+  aspect-ratio: 1.82;
   &__image {
-    display: block;
-    margin: 100px 0 100px 0;
+    object-fit: contain;
   }
 }
 
 @media screen and (max-width: 1350px){
   .mainBanner {
     max-width: 300px;
-    &__image {
-      display: block;
-      margin: 50px 0 50px 0;
-    }
+    margin: 50px auto 50px auto;
   }
 }
 
 
 @media screen and (max-width: 550px){
   .mainBanner {
-    max-width: 100%;
-    padding: 0 100px;
-    &__image {
-      display: block;
-      margin: 50px 0 50px 0;
-    }
+    max-width: 200px;
+
   }
 }

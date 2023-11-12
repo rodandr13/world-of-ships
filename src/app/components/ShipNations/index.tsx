@@ -14,8 +14,9 @@ export default function ShipNations({ styles, nation }: Props) {
           <Image
             className={styles.shipsList__countryImage}
             src={`https:${nation.icons.large}`}
-            alt="Флаг Японии"
+            alt={`Флаг ${NATIONS_RU[nation.name]}`}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
           />
         </div>
         <h2 className={styles.shipsList__countryTitle}>{NATIONS_RU[nation.name]}</h2>

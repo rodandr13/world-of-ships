@@ -177,7 +177,6 @@ export default function Filters() {
         </ul>
         <footer className={styles.filters__footer}>
           <Button style="text" type="button" title="Скрыть" handleClick={handleHideFilters}/>
-          <Button style="accept" type="button" title="Применить"  />
         </footer>
       </div>
     </section>

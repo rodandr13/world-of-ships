@@ -1,10 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
 import styles from './hamburgerButton.module.scss';
 
+type Props = {
+  isOpen: boolean,
+  toggleMenu: () => void,
+};
 
-function HamburgerButton({ isOpen, toggleMenu }) {
+function HamburgerButton({ isOpen, toggleMenu } : Props) {
 
 
   return (

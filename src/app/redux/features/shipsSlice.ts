@@ -7,7 +7,6 @@ export const shipsSlice = createSlice({
   },
   reducers: {
     setFilteredShips: (state, action) => {
-      console.log(action.payload);
       state.filteredList = action.payload;
     },
   },

@@ -16,13 +16,13 @@ export default function Navigation() {
     <nav className={styles.navigation}>
       <Logo />
       <ul className={`${styles.menu} ${styles.menu_type_mobile} ${isOpen ? styles.menu_open : ''}`}>
-        <li className={styles.menu__item}><a className={styles.menu__link} href="">Новости</a></li>
-        <li className={styles.menu__item}><a className={styles.menu__link} href="">Игра</a></li>
-        <li className={styles.menu__item}><a className={styles.menu__link} href="">Обучение</a></li>
-        <li className={styles.menu__item}><a className={styles.menu__link} href="">Медиа</a></li>
-        <li className={styles.menu__item}><a className={styles.menu__link} href="">Игроки</a></li>
-        <li className={styles.menu__item}><a className={styles.menu__link} href="">Форум</a></li>
-        <li className={styles.menu__item}><a className={styles.menu__link} href="">Морское братство</a></li>
+        <li className={styles.menu__item}><a className={styles.menu__link} href="https://korabli.su/ru/news/">Новости</a></li>
+        <li className={styles.menu__item}><a className={styles.menu__link} href="https://korabli.su/ru/content/game/">Игра</a></li>
+        <li className={styles.menu__item}><a className={styles.menu__link} href="https://korabli.su/ru/content/education/">Обучение</a></li>
+        <li className={styles.menu__item}><a className={styles.menu__link} href="https://www.youtube.com/@korabli">Медиа</a></li>
+        <li className={styles.menu__item}><a className={styles.menu__link} href="https://profile.korabli.su/">Игроки</a></li>
+        <li className={styles.menu__item}><a className={styles.menu__link} href="https://forum.korabli.su/">Форум</a></li>
+        <li className={styles.menu__item}><a className={styles.menu__link} href="https://friends.korabli.su/">Морское братство</a></li>
       </ul>
       <Button type="button" title="Играй бесплатно" parentBlockClasses={styles.navigation__button} style="download" />
       <HamburgerButton isOpen={isOpen} toggleMenu={toggleMenu} />

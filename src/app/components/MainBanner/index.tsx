@@ -8,8 +8,7 @@ export default function MainBanner() {
        className={styles.mainBanner__image}
        src="/images/main_banner.svg"
        alt="Логотип Мир кораблей"
-       width={448}
-       height={245}
+       fill
      />
    </section>
   );

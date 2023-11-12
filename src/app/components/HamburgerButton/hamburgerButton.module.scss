@@ -47,3 +47,11 @@
     display: block;
   }
 }
+
+@media screen and (max-width: 450px) {
+  .hamburger {
+    &__button_type_close {
+      right: 15px;
+    }
+  }
+}
