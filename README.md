@@ -20,7 +20,7 @@
 
 ### Ссылка на проект
 
-Проект доступен онлайн по адресу: [https://ships.testprojectsdeploy.ru]() 
+Проект доступен онлайн по адресу: [Мир Кораблей](https://ships.testprojectsdeploy.ru)
 
 
 ### Запуск проекта
