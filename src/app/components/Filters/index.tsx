@@ -11,6 +11,7 @@ import {
   toggleNationOption,
 } from '@/app/redux/features/filtersSlice';
 import { useTypedSelector } from '@/app/hooks/useTypedSelector';
+import clsx from 'clsx';
 
 export default function Filters() {
   const dispatch = useTypedDispatch();
@@ -64,7 +65,11 @@ export default function Filters() {
     <section className={styles.filters}>
       <div className={styles.filters__buttonContainer}>
         <Button type="button" style="filter" title="Фильтры" parentBlockClasses={styles.filters__button} handleClick={handleClick} />
-        <button className={`${styles.filters__buttonClear} ${!isFiltersSelected && styles.filters__buttonClear_hide}`} type="button" onClick={handleClearFilters}>Очистить фильтры</button>
+        <button
+          className={clsx(styles.filters__buttonClear, !isFiltersSelected && styles.filters__buttonClear_hide)}
+          type="button"
+          onClick={handleClearFilters}
+        >Очистить фильтры</button>
       </div>
       <div className={styles.filters__activeFilters}>
         {selectedLevels.length > 0 &&
@@ -98,7 +103,7 @@ export default function Filters() {
             </ul>
         }
       </div>
-      <div className={`${styles.filters__container} ${!visibleFilters ? styles.filters__container_hide : ''}`}>
+      <div className={clsx(styles.filters__container, !visibleFilters && styles.filters__container_hide)}>
         <header className={styles.filters__header}>
           <h2 className={styles.filters__title}>Фильтры</h2>
         </header>
