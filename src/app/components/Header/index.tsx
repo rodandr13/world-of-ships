@@ -1,4 +1,4 @@
-import styles from './header.module.css';
+import styles from './header.module.scss';
 import Navigation from '@/app/components/Navigation';
 
 export default function Header() {
