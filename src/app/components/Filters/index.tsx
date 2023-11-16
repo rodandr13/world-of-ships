@@ -38,7 +38,7 @@ export default function Filters() {
   function handleClick() {
     setVisibleFilters(!visibleFilters);
   }
-  
+
   function handleHideFilters() {
     if (visibleFilters) {
       setVisibleFilters(false);
